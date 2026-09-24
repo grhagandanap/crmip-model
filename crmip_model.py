@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.optimize import minimize
@@ -773,7 +775,7 @@ class CRMIPModel:
             print(f"Warning: Missing coordinates for wells: {missing_wells}")
             for w in missing_wells:
                 well_coords[w] = (0, 0)
-        cmap_obj = plt.cm.get_cmap(cmap) if cmap else None
+        cmap_obj = plt.colormaps[cmap] if cmap else None
         if vmax is None:
             if isinstance(f_matrix, np.ndarray):
                 vmax = np.max(f_matrix)
@@ -1058,7 +1060,7 @@ class CRMIPModel:
         if missing_wells:
             for w in missing_wells:
                 well_coords[w] = (0, 0)
-        cmap_obj = plt.cm.get_cmap(cmap) if cmap else None
+        cmap_obj = plt.colormaps[cmap] if cmap else None
         if vmax is None:
             if isinstance(f_matrix, np.ndarray):
                 vmax = np.max(f_matrix)

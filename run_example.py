@@ -7,7 +7,7 @@ warnings.filterwarnings('ignore', category=RuntimeWarning)
 np.random.seed(42) # seeding random numbers
 
 # start
-file_path = r"~/CRM - AOI Beta Demo.xlsx" # specific path of the project
+file_path = r"./CRM - AOI Beta Demo.xlsx" # specific path of the project
 
 # Load data
 df = pd.read_excel(file_path, sheet_name="Data Day") # membaca data produksi
@@ -19,7 +19,7 @@ coords = pd.read_excel(file_path, sheet_name="Location")
 well_coords_dict = dict(zip(coords["WELL"], zip(coords["X"], coords["Y"])))
 
 # total number of producer
-number_of_producer = 31
+number_of_producer = 22
 
 # Initialize model
 model = CRMIPModel(
@@ -41,7 +41,7 @@ model.add_distance_constraints(
 # There 2 available methods: SLSQP and trust-constr
 stepwise_kwargs = {"optimizer_method": "SLSQP", # SLSQP dan trust-constr
                    "max_time_per_step": 500,
-                   "n_jobs": -1,
+                   "n_jobs": 1,
                    "verbose": True}
 
 # Run comparison models (includes Gentil WC fitting using preliminary static_noaq connectivities)
@@ -71,4 +71,4 @@ model.plot_connectivity_over_time(
 )
 
 # Export dynamic connectivity plots without background
-model.export_comparison_params(r"~/CRM - AOI Beta Demo Result.xlsx")
+model.export_comparison_params(r"./CRM - AOI Beta Demo Result.xlsx")
